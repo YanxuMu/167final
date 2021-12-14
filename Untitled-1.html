@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+	<div>
+
+  <header>
+    <h1>Do you know the dates of these holidays?</h1>
+  
+	    <link rel="stylesheet" href="test.css" type="text/css">
+  </header>
+	
+  <section>
+    <!-- <button onclick="yourName()">How would you like to call you?</button> -->
+    <p id="demo"></p>
+
+    <form name="quizForm" >
+      <h3>1. Martin Luther King Jr. Day</h3>
+      <input type="radio" name="q1" value="a" id="q1a">a. Third Monday in January<br>
+      <input type="radio" name="q1" value="b" id="q1b">b. Fourth Monday in January<br>
+	  <input type="radio" name="q1" value="c" id="q1c">c. First Wednesday of January<br>
+	  <input type="radio" name="q1" value="c" id="q1d">d. Fourth Monday in January<br>
+      <h3>2. Washington's Birthday</h3>
+      <input type="radio" name="q2" value="a" id="q2a">a. First Monday in February<br>
+      <input type="radio" name="q2" value="b" id="q2b">b. The first Tuesday of February<br>
+      <input type="radio" name="q2" value="c" id="q2c">c. Second Monday in March<br>
+      <input type="radio" name="q2" value="d" id="q2d">d. Third Monday in February<br>
+
+      <h3>3. Independence Day</h3>
+      <input type="radio" name="q3" value="a" id="q3a">a. July 1st<br>
+      <input type="radio" name="q3" value="b" id="q3b">b. July 3rd<br>
+      <input type="radio" name="q3" value="c" id="q3c">c. July 4th<br>
+      <input type="radio" name="q3" value="d" id="q3d">d. July 5th<br>
+
+      <h3>4. Labor Day</h3>
+      <input type="radio" name="q4" value="a" id="q4a">a. September 1st<br>
+      <input type="radio" name="q4" value="b" id="q4b">b. September 2nd<br>
+      <input type="radio" name="q4" value="c" id="q4c">c. First Monday in September<br>
+      <input type="radio" name="q4" value="d" id="q4d">d. Second Monday in September<br>
+
+      <h3>5. Columbus Day</h3>
+      <input type="radio" name="q5" value="a" id="q5a">a. October 2nd<br>
+      <input type="radio" name="q5" value="b" id="q5b">b. October 1st<br>
+      <input type="radio" name="q5" value="c" id="q5c">c. First Monday in October<br>
+      <input type="radio" name="q5" value="d" id="q5d">d. Second Monday in October<br>
+      <br><br>
+      <input type="submit" value="Submit Answers"><button onclick="restart()" class="restart">Start Over</button>
+    </form>
+    <div id="results"> </div>
+  </section>
+
+</div>
+
+
+
+<script>
+var name = yourName("name")
+
+function yourName() {
+  var name = prompt("How would you like to call you?", "I'm...");
+  var today = new Date;
+  var hour = today.getHours();
+
+  if (hour < 12) {
+    document.getElementById("demo").innerHTML = "Good Morning! " + name;
+  } else if (hour < 18) {
+    document.getElementById("demo").innerHTML = "Good Afternoon! " + name;
+  } else {
+    document.getElementById("demo").innerHTML = "Good Evening! " + name;
+  }
+}
+
+var formElement = document.forms['quizForm'];
+
+formElement.onsubmit = function submitAnswers() {
+	var total = 5;
+	var score = 0;
+	var q1 = document.forms["quizForm"]["q1"].value,
+	    q2 = document.forms["quizForm"]["q2"].value,
+	    q3 = document.forms["quizForm"]["q3"].value,
+	    q4 = document.forms["quizForm"]["q4"].value,
+	    q5 = document.forms["quizForm"]["q5"].value;
+
+	for (i = 1; i <= total;i++) {
+		if(eval('q'+i) === null || eval('q'+i) === ''){
+			alert('You missed question '+ i);
+			return false;
+		}
+	}
+
+	var answers = ["a","d","c","c","d"];
+
+	for (i = 1; i <= total;i++) {
+		if (eval('q'+i) === answers[i - 1]) {
+			score++;
+		}
+	}
+
+	var results = document.getElementById('results');
+	results.innerHTML ='<h3>Your score is <span>'+score+'</span> out of <span>'+total+'</span></h3>';
+
+	return false;
+}
+
+  function restart() {
+    location.reload(true);
+  }
+
+  
+</script>
+<body>
+</body>
+</html>
